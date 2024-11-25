@@ -1,14 +1,18 @@
 package com.example.learningspring1.controller;
 
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.web.bind.annotation.*;
 
+import javax.sql.DataSource;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,7 +23,7 @@ public class AuthController {
 
 
     @PostMapping("/login")
-    public Map<String, Object> login(HttpServletRequest request) {
+    public Map<String, Object> login(HttpServletRequest request, HttpServletResponse response) {
         // Obtain the current authenticated user
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
@@ -31,12 +35,12 @@ public class AuthController {
         HttpSession session = request.getSession();
 
         // Create a response map
-        Map<String, Object> response = new HashMap<>();
-        response.put("username", authentication.getName());
-        response.put("authorities", authentication.getAuthorities());
-        response.put("sessionId", session.getId());
+        Map<String, Object> responseMap = new HashMap<>();
+        responseMap.put("username", authentication.getName());
+        responseMap.put("authorities", authentication.getAuthorities());
+        responseMap.put("sessionId", session.getId());
 
-        return response;
+        return responseMap;
     }
 
     @GetMapping("/current-session")

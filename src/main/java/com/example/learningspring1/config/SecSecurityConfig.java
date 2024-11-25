@@ -88,7 +88,7 @@ public class SecSecurityConfig {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(session -> session
-                        .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
+                        .sessionCreationPolicy(SessionCreationPolicy.NEVER)
 //                        .maximumSessions(1) // Allow only one session per user
 //                        .maxSessionsPreventsLogin(true) // Kick out the old session
                 )
