@@ -1,0 +1,35 @@
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Account Details</h2>
+    <div class="card shadow">
+      <div class="card-body">
+        <table class="table table-striped">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">Account Number</th>
+              <th scope="col">Account Type</th>
+              <th scope="col">Balance</th>
+              <th scope="col">Date Opened</th>
+              <th scope="col">Status</th>
+              <th scope="col">Date Closed</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Loop through accounts array to populate rows -->
+            <tr *ngFor="let account of accounts">
+              <td>{{ account.accountNumber }}</td>
+              <td>{{ account.accountType }}</td>
+              <td>$ {{ account.balance | number:'1.2-2' }}</td>
+              <td>{{ account.dateOpened | date:'longDate' }}</td>
+              <td>
+                <span [ngClass]="{'text-success': account.accountStatus === '1', 'text-danger': account.accountStatus === '0'}">
+                  {{ account.accountStatus === '1' ? 'Active' : 'Closed' }}
+                </span>
+              </td>
+              <td>{{ account.dateClosed !== 'null' ? (account.dateClosed | date:'longDate') : 'N/A' }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  
