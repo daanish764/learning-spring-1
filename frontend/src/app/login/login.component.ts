@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,9 @@ export class LoginComponent {
   password: string = 'admin'
 
 
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(private http: HttpClient, 
+    private router: Router, 
+    private authService : AuthService) {
 
   }
 
@@ -37,8 +40,9 @@ export class LoginComponent {
       headers: headers,
       withCredentials: true, // Include cookies/session
     }).subscribe({
-      next: (response) => {
-        console.log(response);
+      next: (response : any) => {
+        console.log(response.sessionId);
+        this.authService.login(response.sessionId);
         this.router.navigate(['accounts']);
       },
       error: (err) => {
