@@ -3,32 +3,27 @@ package com.example.learningspring1.dto;
 import com.example.learningspring1.model.Account;
 
 public class AccountDto {
-    private Long accountId;
+    private String accountNumber;
     private String accountType;
+    private String balance;
+    private String dateOpened;
     private String accountStatus;
+    private String dateClosed;
+
 
     public AccountDto(Account acct) {
-        this.accountId = acct.getAccountId();
+        this.accountNumber = String.valueOf(acct.getAccountNumber());
         this.accountType = String.valueOf(acct.getAccountType());
         this.accountStatus = String.valueOf(acct.getAccountStatus());
+        this.balance = String.valueOf(acct.getBalance());
+        this.dateOpened = String.valueOf(acct.getDateOpened());
+        this.accountStatus = String.valueOf(acct.getAccountId());
+        this.dateClosed = String.valueOf(acct.getDateClosed());
+
     }
 
-    public AccountDto(Long accountId, String accountType, String accountStatus) {
-        this.accountId = accountId;
-        this.accountType = accountType;
-        this.accountStatus = accountStatus;
-    }
 
     // Getters and Setters
-
-
-    public Long getAccountId() {
-        return accountId;
-    }
-
-    public void setAccountId(Long accountId) {
-        this.accountId = accountId;
-    }
 
     public String getAccountType() {
         return accountType;
@@ -44,5 +39,37 @@ public class AccountDto {
 
     public void setAccountStatus(String accountStatus) {
         this.accountStatus = accountStatus;
+    }
+
+    public String getBalance() {
+        return balance;
+    }
+
+    public void setBalance(String balance) {
+        this.balance = balance;
+    }
+
+    public String getAccountNumber() {
+        return accountNumber;
+    }
+
+    public void setAccountNumber(String accountNumber) {
+        this.accountNumber = accountNumber;
+    }
+
+    public String getDateOpened() {
+        return dateOpened;
+    }
+
+    public void setDateOpened(String dateOpened) {
+        this.dateOpened = dateOpened;
+    }
+
+    public String getDateClosed() {
+        return dateClosed;
+    }
+
+    public void setDateClosed(String dateClosed) {
+        this.dateClosed = dateClosed;
     }
 }

@@ -19,6 +19,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/auth")
+//@CrossOrigin(origins = "http://localhost:4200") // Allow specific origin
 public class AuthController {
 
 
@@ -58,26 +59,19 @@ public class AuthController {
         return response;
     }
 
-    @GetMapping("/logout")
-    public ResponseEntity<Map<String, String>> logout(HttpServletRequest request, HttpServletResponse response) {
-        // Invalidate the session
-//        HttpSession session = request.getSession(false); // Get the current session if it exists
-//        if (session != null) {
-//            session.invalidate();
-//        }
-
-        // Use SecurityContextLogoutHandler to handle session invalidation properly
-        SecurityContextLogoutHandler logoutHandler = new SecurityContextLogoutHandler();
-        logoutHandler.logout(request, response, SecurityContextHolder.getContext().getAuthentication());
-
-
-        // Clear the SecurityContext
-//        SecurityContextHolder.clearContext();
-
-        // Return a response indicating successful logout
-        Map<String, String> responseMap = new HashMap<>();
-        responseMap.put("message", "User logged out successfully");
-        return ResponseEntity.ok(responseMap);
-    }
+    // SecSecurityConfig has a logouts and will handle logging user out
+//    @GetMapping("/logout")
+//    public ResponseEntity<Map<String, String>> logout(HttpServletRequest request, HttpServletResponse response) {
+//
+//        // Use SecurityContextLogoutHandler to handle session invalidation properly
+//        SecurityContextLogoutHandler logoutHandler = new SecurityContextLogoutHandler();
+//        logoutHandler.logout(request, response, SecurityContextHolder.getContext().getAuthentication());
+//
+//
+//        // Return a response indicating successful logout
+//        Map<String, String> responseMap = new HashMap<>();
+//        responseMap.put("message", "User logged out successfully");
+//        return ResponseEntity.ok(responseMap);
+//    }
 
 }

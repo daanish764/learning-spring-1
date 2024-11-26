@@ -11,8 +11,9 @@ public class Account {
     public Account() {
     }
 
-    public Account(Long accountId, String accountNumber, AccountType accountType, Double balance, LocalDate dateOpened, AccountStatus accountStatus, LocalDate dateClosed) {
+    public Account(Long accountId, User user, String accountNumber, AccountType accountType, Double balance, LocalDate dateOpened, AccountStatus accountStatus, LocalDate dateClosed) {
         this.accountId = accountId;
+        this.user = user;
         this.accountNumber = accountNumber;
         this.accountType = accountType;
         this.balance = balance;
@@ -20,6 +21,7 @@ public class Account {
         this.accountStatus = accountStatus;
         this.dateClosed = dateClosed;
     }
+
 
     public HashMap<String, String> toHashMapRepresentation() {
         HashMap<String, String> map = new HashMap<>();
