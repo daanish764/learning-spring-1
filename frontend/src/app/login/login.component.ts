@@ -12,44 +12,34 @@ export class LoginComponent {
 
   username: string = 'admin'
   password: string = 'admin'
+  error: string|null = null
 
 
-  constructor(private http: HttpClient, 
-    private router: Router, 
+  constructor(private http: HttpClient,
+    private router: Router,
     private authService : AuthService) {
 
   }
 
   onSubmit() {
 
+    var sessionId = null
 
-   const url = 'http://localhost:8080/auth/login';
-   const body = {
-    username: this.username,
-    password: this.password
-   }
-
-   const headers = {
-    Authorization: "Basic " + btoa(`${this.username}:${this.password}`),
-    'Content-Type': "application/json"
-   }
-
-    //console.log("onSubmit was called with username="+ this.username + " password=" + this.password + " .");
-    console.log(url, body, {headers:headers, withCredentials:true});
-    this.http.post(url, body, {
-      headers: headers,
-      withCredentials: true, // Include cookies/session
-    }).subscribe({
+    this.authService.login(this.username, this.password).subscribe({
       next: (response : any) => {
         console.log(response.sessionId);
-        this.authService.login(response.sessionId);
-        this.router.navigate(['accounts']);
+        sessionId = response.sessionId
+        if(sessionId !== null) {
+          this.authService.setSessionId(sessionId);
+          this.router.navigate(['accounts']);
+        }
+        else {
+          this.error = "Login Denied!"
+        }
       },
-      error: (err) => {
-        alert('LOGIN FAILED!');
-        console.log(err);
-      }
+      error: () => { this.error = "Login Denied!" }
     });
+
     
   }
 

@@ -21,13 +21,9 @@ import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import javax.sql.DataSource;
 
-import java.util.Arrays;
-
-import static org.springframework.security.config.Customizer.withDefaults;
 import static org.springframework.security.web.header.writers.ReferrerPolicyHeaderWriter.ReferrerPolicy.SAME_ORIGIN;
 
 
@@ -38,6 +34,11 @@ public class SecSecurityConfig {
     @Autowired
     DataSource dataSource;
 
+    private final AuthenticationEntryPoint authenticationEntryPoint;
+
+    public SecSecurityConfig(AuthenticationEntryPoint authenticationEntryPoint) {
+        this.authenticationEntryPoint = authenticationEntryPoint;
+    }
 
     // Enable jdbc authentication
     @Autowired
@@ -112,13 +113,13 @@ public class SecSecurityConfig {
                 .logout(logout -> logout
                         .logoutUrl("/auth/logout")
                         .invalidateHttpSession(true)
-                        .deleteCookies("JSESSIONID")
+                        .deleteCookies("SESSION")
                         .logoutSuccessHandler((request, response, authentication) -> {
                             // Do nothing; just return a 200 status
                             response.setStatus(HttpServletResponse.SC_OK);
                         })
                 )
-                .httpBasic(withDefaults())
+                .httpBasic(w -> w.authenticationEntryPoint(authenticationEntryPoint))
 //                .securityContext(securityContext -> securityContext.requireExplicitSave(true)) // Prevent implicit security context storage
 //                .requestCache(requestCache -> requestCache.disable()) // Disable request caching
                 .headers(headers -> headers.referrerPolicy(referrer -> referrer.policy(SAME_ORIGIN)));
