@@ -1,5 +1,6 @@
 package com.example.learningspring1.config;
 
+import com.example.learningspring1.config.jwtconfig.JwtAuthenticationFilter;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -20,6 +21,7 @@ import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 
 import javax.sql.DataSource;
@@ -69,7 +71,7 @@ public class SecSecurityConfig {
                 .build();
 
 
-        jdbcUserDetailsManager.deleteUser(admin2.getUsername());
+        //jdbcUserDetailsManager.deleteUser(admin2.getUsername());
 
         if(!jdbcUserDetailsManager.userExists(admin2.getUsername())) {
             jdbcUserDetailsManager.createUser(admin2);
@@ -88,7 +90,7 @@ public class SecSecurityConfig {
 
     //
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain filterChain(HttpSecurity http, JwtAuthenticationFilter jwtFilter) throws Exception {
 
         http
                 .csrf(AbstractHttpConfigurer::disable)
@@ -107,8 +109,11 @@ public class SecSecurityConfig {
                 )
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/auth/login").permitAll()
+                        .requestMatchers("auth/loginJ").permitAll()
+                        .requestMatchers("auth/logout").permitAll()
                         .anyRequest().authenticated()
                 )
+                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
                // .formLogin(withDefaults())
                 .logout(logout -> logout
                         .logoutUrl("/auth/logout")
@@ -119,7 +124,8 @@ public class SecSecurityConfig {
                             response.setStatus(HttpServletResponse.SC_OK);
                         })
                 )
-                .httpBasic(w -> w.authenticationEntryPoint(authenticationEntryPoint))
+//                .httpBasic(w -> w.authenticationEntryPoint(authenticationEntryPoint))
+                .httpBasic(w -> w.disable()) // disable basic auth
 //                .securityContext(securityContext -> securityContext.requireExplicitSave(true)) // Prevent implicit security context storage
 //                .requestCache(requestCache -> requestCache.disable()) // Disable request caching
                 .headers(headers -> headers.referrerPolicy(referrer -> referrer.policy(SAME_ORIGIN)));

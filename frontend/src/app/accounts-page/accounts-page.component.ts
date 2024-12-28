@@ -9,21 +9,25 @@ import { Component } from '@angular/core';
 export class AccountsPageComponent {
 
   accounts:any = null
+
+
   constructor(private http: HttpClient) { }
-  
-
-
 
   ngOnInit() {
     const url = 'http://localhost:8080/api/accounts'
 
-    this.http.get(url, { withCredentials: true}).subscribe({
-      next: (response) => {this.accounts = response}, 
+    const headers = {
+      'Content-Type': "application/json"
+     }
+
+
+    this.http.get(url, { headers: headers, withCredentials: true }).subscribe({
+      next: (response) => {this.accounts = response},
       error: (err) => {
         console.log(err);
-      } 
+      }
     })
   }
-  
+
 
 }

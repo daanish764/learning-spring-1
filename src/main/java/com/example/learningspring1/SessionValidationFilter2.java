@@ -20,7 +20,8 @@ import java.util.Arrays;
 import java.util.Base64;
 
 //@WebFilter("/*") // Intercept all requests; you can customize the URL pattern as needed
-@Component
+//@Component
+// we are no longer using traditional sessions
 public class SessionValidationFilter2 implements Filter {
 
     private final JdbcTemplate jdbcTemplate;
@@ -39,7 +40,7 @@ public class SessionValidationFilter2 implements Filter {
 
             // Exclude the login endpoint from session validation
             String requestURI = httpRequest.getRequestURI();
-            if ("/auth/login".equals(requestURI)) {
+            if ("/auth/login".equals(requestURI) || "/auth/loginJ".equals(requestURI)) {
                 chain.doFilter(request, response);
                 return;
             }
@@ -65,7 +66,7 @@ public class SessionValidationFilter2 implements Filter {
             }
 
             // If no valid session is found, reject the request
-            throw new ServletException("No session found. User is not logged in.");
+//            throw new ServletException("No session found. User is not logged in.");
         }
 
         chain.doFilter(request, response);

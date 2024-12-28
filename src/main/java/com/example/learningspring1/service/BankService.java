@@ -36,7 +36,7 @@ public class BankService {
     }
 
     public Account createAccountForUser(String username, Account account) {
-        User user = userRepository.findByUsername(username);
+        User user = userRepository.findByUsername(username).orElseThrow(() -> new IllegalArgumentException("User not found"));
         if (user == null) {
             throw new IllegalArgumentException("User not found");
         }

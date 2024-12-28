@@ -28,7 +28,7 @@ public class DataInitializer implements ApplicationListener<ApplicationReadyEven
     public void onApplicationEvent(ApplicationReadyEvent event) {
         if (repository.count() == 0) {
 
-            User user = userRepository.findByUsername("admin");
+            User user = userRepository.findByUsername("admin").orElseThrow(() -> new RuntimeException("cannot find user"));
 
             repository.save(new Account(
                     null,
