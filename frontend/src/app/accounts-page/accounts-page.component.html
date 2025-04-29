@@ -16,7 +16,7 @@
           <tbody>
             <!-- Loop through accounts array to populate rows -->
             <tr *ngFor="let account of accounts">
-              <td>{{ account.accountNumber }}</td>
+              <td (click)="routeToAccountDetailPage(account)"><u>{{ account.accountNumber }}</u></td>
               <td>{{ account.accountType }}</td>
               <td>$ {{ account.balance | number:'1.2-2' }}</td>
               <td>{{ account.dateOpened | date:'longDate' }}</td>

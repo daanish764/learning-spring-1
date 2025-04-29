@@ -29,5 +29,10 @@ export class AccountsPageComponent {
     })
   }
 
+  routeToAccountDetailPage(account: any) {
+    console.log(account);
+    console.log("need to implement ")
+  }
+
 
 }

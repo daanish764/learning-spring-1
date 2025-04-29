@@ -1,6 +1,5 @@
-package com.example.learningspring1.repository;
+package com.example.learningspring1.account;
 
-import com.example.learningspring1.model.Account;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

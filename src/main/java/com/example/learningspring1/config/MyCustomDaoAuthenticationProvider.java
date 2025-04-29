@@ -11,13 +11,9 @@ public class MyCustomDaoAuthenticationProvider extends DaoAuthenticationProvider
         String username = authentication.getName();
         String password = (String) authentication.getCredentials();
 
-        // Log password and encoded version for debugging
-        System.out.println("Authenticating user: " + username);
-        System.out.println("Password entered: " + password);
 
         UserDetails userDetails = getUserDetailsService().loadUserByUsername(username);
         String encodedPassword = userDetails.getPassword();
-        System.out.println("Stored password: " + encodedPassword);
 
         return super.authenticate(authentication);
     }

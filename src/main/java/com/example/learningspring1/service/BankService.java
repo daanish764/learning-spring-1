@@ -1,11 +1,11 @@
 package com.example.learningspring1.service;
 
-import com.example.learningspring1.model.Account;
-import com.example.learningspring1.model.Payment;
-import com.example.learningspring1.model.User;
-import com.example.learningspring1.repository.AccountRepository;
-import com.example.learningspring1.repository.PaymentRepository;
-import com.example.learningspring1.repository.UserRepository;
+import com.example.learningspring1.account.Account;
+import com.example.learningspring1.payment.Payment;
+import com.example.learningspring1.user.User;
+import com.example.learningspring1.account.AccountRepository;
+import com.example.learningspring1.payment.PaymentRepository;
+import com.example.learningspring1.user.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

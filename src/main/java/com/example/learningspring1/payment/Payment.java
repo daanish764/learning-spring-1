@@ -1,5 +1,6 @@
-package com.example.learningspring1.model;
+package com.example.learningspring1.payment;
 
+import com.example.learningspring1.account.Account;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;

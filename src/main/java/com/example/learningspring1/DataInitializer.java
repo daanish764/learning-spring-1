@@ -1,14 +1,11 @@
 package com.example.learningspring1;
 
-import com.example.learningspring1.config.SecSecurityConfig;
-import com.example.learningspring1.model.Account;
-import com.example.learningspring1.model.User;
-import com.example.learningspring1.repository.AccountRepository;
-import com.example.learningspring1.repository.UserRepository;
-import jakarta.annotation.PostConstruct;
+import com.example.learningspring1.account.Account;
+import com.example.learningspring1.user.User;
+import com.example.learningspring1.account.AccountRepository;
+import com.example.learningspring1.user.UserRepository;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationListener;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;

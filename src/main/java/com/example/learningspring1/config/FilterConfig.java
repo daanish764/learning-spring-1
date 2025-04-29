@@ -1,6 +1,5 @@
 package com.example.learningspring1.config;
 
-import com.example.learningspring1.SessionValidationFilter2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;

@@ -1,16 +1,9 @@
-package com.example.learningspring1.controller;
+package com.example.learningspring1.account;
 
-import com.example.learningspring1.dto.AccountDto;
-import com.example.learningspring1.model.Account;
 import com.example.learningspring1.service.BankService;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 @RestController

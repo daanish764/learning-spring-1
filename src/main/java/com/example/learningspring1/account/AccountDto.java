@@ -1,6 +1,4 @@
-package com.example.learningspring1.dto;
-
-import com.example.learningspring1.model.Account;
+package com.example.learningspring1.account;
 
 public class AccountDto {
     private String accountNumber;

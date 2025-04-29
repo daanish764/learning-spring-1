@@ -1,6 +1,5 @@
-package com.example.learningspring1.repository;
+package com.example.learningspring1.payment;
 
-import com.example.learningspring1.model.Payment;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

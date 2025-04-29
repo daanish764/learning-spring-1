@@ -1,7 +1,7 @@
-package com.example.learningspring1.model;
+package com.example.learningspring1.user;
 
+import com.example.learningspring1.role.Role;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -11,7 +11,6 @@ import java.util.Set;
 @Entity
 @Table(name = "users")
 public class User implements UserDetails {
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

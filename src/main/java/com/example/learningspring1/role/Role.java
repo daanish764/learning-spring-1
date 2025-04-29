@@ -1,5 +1,6 @@
-package com.example.learningspring1.model;
+package com.example.learningspring1.role;
 
+import com.example.learningspring1.user.User;
 import jakarta.persistence.*;
 
 @Entity

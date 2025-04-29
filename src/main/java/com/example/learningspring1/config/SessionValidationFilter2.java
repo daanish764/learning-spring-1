@@ -1,4 +1,4 @@
-package com.example.learningspring1;
+package com.example.learningspring1.config;
 
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebFilter;
@@ -38,32 +38,32 @@ public class SessionValidationFilter2 implements Filter {
             HttpServletResponse httpResponse = (HttpServletResponse) response;
 
 
-            // Exclude the login endpoint from session validation
-            String requestURI = httpRequest.getRequestURI();
-            if ("/auth/login".equals(requestURI) || "/auth/loginJ".equals(requestURI)) {
-                chain.doFilter(request, response);
-                return;
-            }
+//            // Exclude the login endpoint from session validation
+//            String requestURI = httpRequest.getRequestURI();
+//            if ("/auth/login".equals(requestURI) || "/auth/loginJ".equals(requestURI)) {
+//                chain.doFilter(request, response);
+//                return;
+//            }
 
-            // Validate session for other endpoints
-            Cookie[] cookies = httpRequest.getCookies();
-            if (cookies != null) {
-                for (Cookie cookie : cookies) {
-                    if ("SESSION".equals(cookie.getName())) {
-                        String sessionId = decodeSessionId(cookie.getValue());
-
-                        if (!isSessionValid(sessionId)) {
-                            httpResponse.setStatus(HttpServletResponse.SC_UNAUTHORIZED); // Set 401 status
-                            httpResponse.getWriter().write("Invalid or expired session");
-                            return; // Stop further processing
-                        }
-
-                        // If session is valid, continue the filter chain
-                        chain.doFilter(request, response);
-                        return;
-                    }
-                }
-            }
+//            // Validate session for other endpoints
+//            Cookie[] cookies = httpRequest.getCookies();
+//            if (cookies != null) {
+//                for (Cookie cookie : cookies) {
+//                    if ("SESSION".equals(cookie.getName())) {
+//                        String sessionId = decodeSessionId(cookie.getValue());
+//
+//                        if (!isSessionValid(sessionId)) {
+//                            httpResponse.setStatus(HttpServletResponse.SC_UNAUTHORIZED); // Set 401 status
+//                            httpResponse.getWriter().write("Invalid or expired session");
+//                            return; // Stop further processing
+//                        }
+//
+//                        // If session is valid, continue the filter chain
+//                        chain.doFilter(request, response);
+//                        return;
+//                    }
+//                }
+//            }
 
             // If no valid session is found, reject the request
 //            throw new ServletException("No session found. User is not logged in.");
